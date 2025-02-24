@@ -11,3 +11,17 @@ export  async function socialLogin(formData) {
 export  async function doLogout(){
     await signOut({redirectTo : "/"})
 }
+
+export async function doCredLogin(formData) {
+    try {
+      const response = await signIn("credentials", {
+        email: formData.get('email'),
+        password: formData.get('password'),
+        redirect: false,
+      });
+  
+      return response;
+    } catch (err) {
+      throw new Error(err?.message || "An error occurred during login");
+    }
+  }
